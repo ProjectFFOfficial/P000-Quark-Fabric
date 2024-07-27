@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "quark",
+	"version": "${version}",
+	"name": "Quark Fabric",
+	"description": "Small things, improving Minecraft bit by bit.",
+	"authors": [
+		"Vazkii, WireSegal, MCVinnyq, Sully"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "https://github.com/VazkiiMods/Quark/blob/master/LICENSE.md",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.projectff.quarkfabric.base.Quark"
+		],
+		"client": [
+			"net.projectff.quarkfabric.base.QuarkClient"
+
+		],
+		"fabric-datagen": [
+			"net.projectff.quarkfabric.base.QuarkDataGenerator"
+		]
+	},
+	"mixins": [
+		"quark.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

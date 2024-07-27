@@ -1,0 +1,87 @@
+package net.projectff.quarkfabric.content.automation.block;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.FallingBlockEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
+import net.projectff.quarkfabric.content.automation.entity.Gravisand;
+import net.projectff.quarkfabric.internal_zeta.BlockUtils;
+import org.jetbrains.annotations.Nullable;
+
+public class GravisandBlock extends Block {
+
+    public GravisandBlock(Settings settings) {
+        super(settings);
+    }
+
+    @Override
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        checkRedstone(world, pos);
+    }
+
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        checkRedstone(world, pos);
+    }
+
+    private void checkRedstone(World world, BlockPos pos) {
+        boolean powered = world.isReceivingRedstonePower(pos);
+
+        if(powered)
+            world.scheduleBlockTick(pos, this, 2);
+    }
+
+    @Override
+    public boolean hasComparatorOutput(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        return 15;
+    }
+
+    @Override
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if(!world.isClient) {
+            if(checkFallable(state, world, pos))
+                for(Direction face : Direction.values()) {
+                    BlockPos offPos = pos.offset(face);
+                    BlockState offState = world.getBlockState(offPos);
+
+                    if(offState.getBlock() == this)
+                        world.scheduleBlockTick(offPos, this, 2);
+                }
+        }
+    }
+
+    private boolean checkFallable(BlockState state, World world, BlockPos pos) {
+        if(!world.isClient) {
+            if(tryFall(state, world, pos, Direction.DOWN))
+                return true;
+            else
+                return tryFall(state, world, pos, Direction.UP);
+        }
+
+        return false;
+    }
+
+    private boolean tryFall(BlockState state, World world, BlockPos pos, Direction facing) {
+        BlockPos target = pos.offset(facing);
+        if((world.isAir(target) || BlockUtils.canFallThrough(world.getBlockState(target))) && world.isInBuildLimit(pos)) {
+            Gravisand entity = new Gravisand(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, facing.getOffsetY());
+            world.setBlockState(pos, state.getFluidState().getBlockState(), 3);
+            world.spawnEntity(entity);
+            return true;
+        }
+
+        return false;
+    }
+}
