@@ -17,6 +17,7 @@ public class Quark implements ModInitializer {
 
 	public static final String MOD_ID = "quark";
 	public static final String ZETA_INSTANCE_ID = "quark-zeta";
+
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static final Zeta ZETA = new FabricZeta(MOD_ID, LoggerFactory.getLogger(ZETA_INSTANCE_ID));
