@@ -12,6 +12,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.projectff.quarkfabric.content.automation.module.ChuteModule;
 import net.projectff.quarkfabric.registries.QuarkBlockEntities;
 import net.projectff.quarkfabric.registries.QuarkBlocks;
 import net.projectff.quarkfabric.registries.QuarkTags;
@@ -23,7 +24,7 @@ public class ChuteBlockEntity extends ZetaBlockEntity implements Inventory {
     private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
     public ChuteBlockEntity(BlockPos pos, BlockState state) {
-        super(QuarkBlockEntities.CHUTE, pos, state);
+        super(ChuteModule.chuteBlockEntityType, pos, state);
     }
     private boolean canDropItem() {
         World world1 = this.getWorld();

@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.projectff.quarkfabric.content.automation.module.EnderWatcherModule;
 import net.projectff.quarkfabric.registries.QuarkBlockEntities;
 import net.projectff.quarkfabric.content.automation.block_entity.EnderWatcherBlockEntity;
 import net.projectff.quarkfabric.internal_zeta.ZetaBock;
@@ -52,6 +53,6 @@ public class EnderWatcherBlock extends ZetaBock implements BlockEntityProvider {
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, QuarkBlockEntities.ENDER_WATCHER, EnderWatcherBlockEntity::serverTick);
+        return createTickerHelper(type, EnderWatcherModule.enderWatcherBlockEntityType, EnderWatcherBlockEntity::serverTick);
     }
 }

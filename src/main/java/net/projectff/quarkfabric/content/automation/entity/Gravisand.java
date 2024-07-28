@@ -22,6 +22,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.projectff.quarkfabric.content.automation.module.GravisandModule;
 import net.projectff.quarkfabric.registries.QuarkBlocks;
 import net.projectff.quarkfabric.registries.QuarkEntities;
 import net.projectff.quarkfabric.mixin.mixins.FallingBlockEntityAccessor;
@@ -36,12 +37,12 @@ public class Gravisand extends FallingBlockEntity {
 
     public Gravisand(EntityType<? extends Gravisand> type, World world) {
         super(type, world);
-        ((FallingBlockEntityAccessor)Gravisand.this).setBlockState(QuarkBlocks.GRAVISAND.getDefaultState());
+        ((FallingBlockEntityAccessor)Gravisand.this).setBlockState(GravisandModule.gravisandBlock.getDefaultState());
     }
 
     public Gravisand(World world, double x, double y, double z, float direction) {
-        this((EntityType<? extends Gravisand>) QuarkEntities.GRAVISAND, world);
-        ((FallingBlockEntityAccessor)Gravisand.this).setBlockState(QuarkBlocks.GRAVISAND.getDefaultState());
+        this((EntityType<? extends Gravisand>) GravisandModule.gravisandEntityType, world);
+        ((FallingBlockEntityAccessor)Gravisand.this).setBlockState(GravisandModule.gravisandBlock.getDefaultState());
         this.intersectionChecked = true;
         this.setPos(x, y + (double)((1.0F - this.getHeight()) / 2.0F), z);
         this.setVelocity(Vec3d.ZERO);

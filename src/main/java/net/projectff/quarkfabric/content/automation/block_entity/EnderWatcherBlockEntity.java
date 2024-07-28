@@ -16,6 +16,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.projectff.quarkfabric.base.Quark;
+import net.projectff.quarkfabric.content.automation.module.EnderWatcherModule;
 import net.projectff.quarkfabric.registries.QuarkBlockEntities;
 import net.projectff.quarkfabric.content.automation.block.EnderWatcherBlock;
 import net.projectff.quarkfabric.internal_zeta.ZetaBlockEntity;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class EnderWatcherBlockEntity extends ZetaBlockEntity {
     public EnderWatcherBlockEntity(BlockPos pos, BlockState state) {
-        super(QuarkBlockEntities.ENDER_WATCHER, pos, state);
+        super(EnderWatcherModule.enderWatcherBlockEntityType, pos, state);
     }
     public static void serverTick(World world, BlockPos pos, BlockState state, EnderWatcherBlockEntity blockEntity) {
         boolean wasLooking = state.get(EnderWatcherBlock.WATCHED);
