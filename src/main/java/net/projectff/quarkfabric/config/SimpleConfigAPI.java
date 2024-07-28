@@ -43,7 +43,7 @@ public class SimpleConfigAPI {
     private boolean broken = false;
 
     public interface DefaultConfig {
-        String get( String namespace );
+        String get(String namespace);
 
         static String empty( String namespace ) {
             return "";
@@ -118,18 +118,17 @@ public class SimpleConfigAPI {
 
     private void loadConfig() throws IOException {
         Scanner reader = new Scanner( request.file );
-        for( int line = 1; reader.hasNextLine(); line ++ ) {
+        for (int line = 1; reader.hasNextLine(); line++) {
             parseConfigEntry( reader.nextLine(), line );
         }
     }
 
     private void parseConfigEntry( String entry, int line ) {
         if( !entry.isEmpty() && !entry.startsWith( "#" ) ) {
-            String[] parts = entry.split("=", 2);
-            if( parts.length == 2 ) {
-                String parts1 = parts[1].split(" #")[0];
-                config.put( parts[0], parts1 );
-            }else{
+            String[] parts = entry.replace(" ", "").split("=", 2);
+            if ( parts.length == 2 ) {
+                config.put( parts[0], parts[1] );
+            } else {
                 throw new RuntimeException("Syntax error in config file on line " + line + "!");
             }
         }
