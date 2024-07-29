@@ -1,10 +1,14 @@
 package net.projectff.quarkfabric.config;
 
 import net.projectff.quarkfabric.base.Quark;
+import oshi.util.tuples.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuarkConfigs {
     private static SimpleConfigAPI configs;
-    public static QuarkConfigProvider configProvider;
+    public static Provider configProvider;
 
     // modules
     public static boolean module_automation = false;
@@ -40,7 +44,7 @@ public class QuarkConfigs {
     public static boolean automation_SugarBlock = false; // "Sugar block"
 
     public static void registerConfigs() {
-        configProvider = new QuarkConfigProvider();
+        configProvider = new Provider();
         createConfigs();
 
         configs = SimpleConfigAPI.of(Quark.MOD_ID + "-config").provider(configProvider).request();
@@ -61,5 +65,45 @@ public class QuarkConfigs {
         automation_Chute = configs.getOrDefault("automation_Chute", true);
         automation_EnderWatcher = configs.getOrDefault("automation_EnderWatcher", true);
         automation_Gravisand = configs.getOrDefault("automation_Gravisand", true);
+    }
+
+    public static class Provider implements SimpleConfigAPI.DefaultConfig {
+        private String configContents = "";
+        private final List<Pair<String, ?>> configList = new ArrayList<>();
+
+        public Provider() {
+        }
+
+        public List<Pair<String, ?>> getConfigList() {
+            return this.configList;
+        }
+
+        // formatting functions
+        public void rawIncersion(String string) {
+            this.configContents += string;
+        }
+        public void newLine(int new_lines) {
+            for (int i = 0; i < new_lines; i++) {
+                this.configContents += '\n';
+            }
+        }
+        public void comment(String comment) {
+            this.configContents += "# " + comment + '\n';
+        }
+        // config functions
+        public void add(String key, Object value) {
+            this.configList.add(new Pair<>(key, value));
+            comment("type: " + value.getClass().getName() + "default value: " + value);
+            this.configContents += key + " = " + value + '\n';
+        }
+        public void add(String key, Object value, String comment) {
+            comment(comment);
+            add(key, value);
+        }
+
+        @Override
+        public String get(String namespace) {
+            return configContents;
+        }
     }
 }
