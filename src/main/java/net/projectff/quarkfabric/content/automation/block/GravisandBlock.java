@@ -2,6 +2,8 @@ package net.projectff.quarkfabric.content.automation.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.LandingBlock;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.ZombieEntity;
@@ -15,7 +17,7 @@ import net.projectff.quarkfabric.content.automation.entity.Gravisand;
 import net.projectff.quarkfabric.internal_zeta.BlockUtils;
 import org.jetbrains.annotations.Nullable;
 
-public class GravisandBlock extends Block {
+public class GravisandBlock extends Block implements LandingBlock {
 
     public GravisandBlock(Settings settings) {
         super(settings);
@@ -76,9 +78,11 @@ public class GravisandBlock extends Block {
     private boolean tryFall(BlockState state, World world, BlockPos pos, Direction facing) {
         BlockPos target = pos.offset(facing);
         if((world.isAir(target) || BlockUtils.canFallThrough(world.getBlockState(target))) && world.isInBuildLimit(pos)) {
-            Gravisand entity = new Gravisand(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, facing.getOffsetY());
-            world.setBlockState(pos, state.getFluidState().getBlockState(), 3);
-            world.spawnEntity(entity);
+            if (facing == Direction.UP) {
+                Entity entity = new Gravisand(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, facing.getOffsetY());
+                world.setBlockState(pos, state.getFluidState().getBlockState(), 3);
+                world.spawnEntity(entity);
+            } else FallingBlockEntity.spawnFromBlock(world, pos, state);
             return true;
         }
 

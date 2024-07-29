@@ -1,8 +1,7 @@
 package net.projectff.quarkfabric.content.automation.entity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FallingBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.MovementType;
@@ -10,17 +9,23 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.projectff.quarkfabric.content.automation.module.GravisandModule;
 import net.projectff.quarkfabric.registries.QuarkBlocks;
@@ -73,7 +78,7 @@ public class Gravisand extends FallingBlockEntity {
             boolean flag4 = this.getBlockState().canPlaceAt(world, blockpos1) && !flag3;
 
             if(flag2 && flag4) {
-                if(world.setBlockState(blockpos1, this.getBlockState(), 3)) {
+                if(world.setBlockState(blockpos1, this.getBlockState(), Block.NOTIFY_ALL)) {
                     ((ServerWorld) world).getChunkManager().threadedAnvilChunkStorage.sendToOtherNearbyPlayers(this, new BlockUpdateS2CPacket(blockpos1, world.getBlockState(blockpos1)));
                     this.discard();
                 } else if(this.dropItem && world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
