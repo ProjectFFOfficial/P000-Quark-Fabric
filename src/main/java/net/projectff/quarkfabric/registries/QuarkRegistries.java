@@ -15,6 +15,8 @@ import net.minecraft.util.Identifier;
 import net.projectff.quarkfabric.base.Quark;
 import net.projectff.quarkfabric.internal_zeta.ZetaBock;
 
+import java.util.Optional;
+
 public class QuarkRegistries {
     public static Block registerBlock(String name, Block block) {
         return Registry.register(Registries.BLOCK, new Identifier(Quark.MOD_ID, name), block);
@@ -32,6 +34,24 @@ public class QuarkRegistries {
     public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntityType(String name, BlockEntityType<T> type) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Quark.MOD_ID, name), type);
     }
+    public static <T> T registerAnything(String name, T obj, Optional<Mode> mode) {
+        if (obj instanceof Block block) {
+            if (mode.isPresent()) {
+                if (mode.get() == Mode.BLOCK) registerBlock(name, block);
+                if (mode.get() == Mode.BLOCK_AND_ITEM) registerBlockAndItem(name, block);
+                if (mode.get() == Mode.BLOCKITEM) registerBlockItem(name, block);
+            }
+            registerBlock(name, block);
+        }
+        if (obj instanceof EntityType<?> entityType) registerEntityType(name, entityType);
+        if (obj instanceof BlockEntityType<?> blockEntityType) registerBlockEntityType(name, blockEntityType);
+        return obj;
+    }
+
+    public enum Mode {
+        BLOCK, BLOCK_AND_ITEM, BLOCKITEM
+    }
+
     public static void addFlammableZetablock(Block block) {
         if (block instanceof ZetaBock zetaBock) {
             FlammableBlockRegistry.getDefaultInstance().add(zetaBock, zetaBock.getFlammabilityZeta(), zetaBock.getFireSpreadSpeedZeta());
