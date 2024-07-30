@@ -8,6 +8,7 @@ import net.projectff.quarkfabric.content.automation.module.EnderWatcherModule;
 import net.projectff.quarkfabric.content.automation.module.GravisandModule;
 import net.projectff.quarkfabric.internal_zeta.FabricZeta;
 import net.projectff.quarkfabric.internal_zeta.Zeta;
+import net.projectff.quarkfabric.registries.QuarkRegistries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

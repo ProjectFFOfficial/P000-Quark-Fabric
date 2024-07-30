@@ -11,14 +11,13 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.projectff.quarkfabric.content.automation.block.ChuteBlock;
 import net.projectff.quarkfabric.content.automation.block_entity.ChuteBlockEntity;
 import net.projectff.quarkfabric.internal_zeta.ZetaModule;
-import net.projectff.quarkfabric.registries.QuarkBlocks;
 import net.projectff.quarkfabric.registries.QuarkRegistries;
 
 public class ChuteModule extends ZetaModule {
     public static BlockEntityType<ChuteBlockEntity> chuteBlockEntityType;
     public static Block chuteBlock;
     public static final void register() {
-        chuteBlock = QuarkRegistries.registerBlockWithItem("chute",
+        chuteBlock = QuarkRegistries.registerBlockAndItem("chute",
                 new ChuteBlock(FabricBlockSettings
                         .of().mapColor(MapColor.OAK_TAN)
                         .strength(2.5F)

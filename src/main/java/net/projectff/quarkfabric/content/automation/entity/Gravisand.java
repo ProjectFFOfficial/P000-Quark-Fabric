@@ -1,7 +1,7 @@
 package net.projectff.quarkfabric.content.automation.entity;
 
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.MovementType;
@@ -9,27 +9,19 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
-import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.projectff.quarkfabric.content.automation.module.GravisandModule;
-import net.projectff.quarkfabric.registries.QuarkBlocks;
-import net.projectff.quarkfabric.registries.QuarkEntities;
 import net.projectff.quarkfabric.mixin.mixins.FallingBlockEntityAccessor;
 import org.jetbrains.annotations.NotNull;
 

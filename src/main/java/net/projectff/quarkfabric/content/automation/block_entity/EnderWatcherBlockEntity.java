@@ -17,7 +17,6 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.projectff.quarkfabric.base.Quark;
 import net.projectff.quarkfabric.content.automation.module.EnderWatcherModule;
-import net.projectff.quarkfabric.registries.QuarkBlockEntities;
 import net.projectff.quarkfabric.content.automation.block.EnderWatcherBlock;
 import net.projectff.quarkfabric.internal_zeta.ZetaBlockEntity;
 import org.joml.Vector3f;

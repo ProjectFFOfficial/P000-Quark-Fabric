@@ -10,14 +10,13 @@ import net.minecraft.entity.SpawnGroup;
 import net.projectff.quarkfabric.content.automation.block.GravisandBlock;
 import net.projectff.quarkfabric.content.automation.entity.Gravisand;
 import net.projectff.quarkfabric.internal_zeta.ZetaModule;
-import net.projectff.quarkfabric.registries.QuarkEntities;
 import net.projectff.quarkfabric.registries.QuarkRegistries;
 
 public class GravisandModule extends ZetaModule {
     public static EntityType<Gravisand> gravisandEntityType;
     public static Block gravisandBlock;
     public static final void register() {
-        gravisandBlock = QuarkRegistries.registerBlockWithItem("gravisand",
+        gravisandBlock = QuarkRegistries.registerBlockAndItem("gravisand",
                 new GravisandBlock(FabricBlockSettings
                         .copy(Blocks.SAND)));
         gravisandEntityType = QuarkRegistries.registerEntityType("gravisand",

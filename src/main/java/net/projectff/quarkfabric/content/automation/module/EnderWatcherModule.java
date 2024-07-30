@@ -9,14 +9,13 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.projectff.quarkfabric.content.automation.block.EnderWatcherBlock;
 import net.projectff.quarkfabric.content.automation.block_entity.EnderWatcherBlockEntity;
 import net.projectff.quarkfabric.internal_zeta.ZetaModule;
-import net.projectff.quarkfabric.registries.QuarkBlocks;
 import net.projectff.quarkfabric.registries.QuarkRegistries;
 
 public class EnderWatcherModule extends ZetaModule {
     public static BlockEntityType<EnderWatcherBlockEntity> enderWatcherBlockEntityType;
     public static Block enderWatcherBlock;
     public static final void register() {
-        enderWatcherBlock = QuarkRegistries.registerBlockWithItem("ender_watcher",
+        enderWatcherBlock = QuarkRegistries.registerBlockAndItem("ender_watcher",
                 new EnderWatcherBlock(FabricBlockSettings
                         .create().mapColor(MapColor.GREEN)
                         .strength(3f, 10f)

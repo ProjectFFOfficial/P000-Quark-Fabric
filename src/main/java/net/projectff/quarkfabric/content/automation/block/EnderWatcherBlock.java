@@ -15,7 +15,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.projectff.quarkfabric.content.automation.module.EnderWatcherModule;
-import net.projectff.quarkfabric.registries.QuarkBlockEntities;
 import net.projectff.quarkfabric.content.automation.block_entity.EnderWatcherBlockEntity;
 import net.projectff.quarkfabric.internal_zeta.ZetaBock;
 import org.jetbrains.annotations.Nullable;

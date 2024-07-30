@@ -13,8 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.projectff.quarkfabric.content.automation.module.ChuteModule;
-import net.projectff.quarkfabric.registries.QuarkBlockEntities;
-import net.projectff.quarkfabric.registries.QuarkBlocks;
+import net.projectff.quarkfabric.content.building.module.GrateModule;
 import net.projectff.quarkfabric.registries.QuarkTags;
 import net.projectff.quarkfabric.content.automation.block.ChuteBlock;
 import net.projectff.quarkfabric.internal_zeta.ZetaBlockEntity;
@@ -32,7 +31,7 @@ public class ChuteBlockEntity extends ZetaBlockEntity implements Inventory {
             BlockPos below = this.getPos().down();
             BlockState state = world1.getBlockState(below);
             return state.isAir() || state.getCollisionShape(world1, below).isEmpty()
-                    || state.getBlock() == QuarkBlocks.GRATE
+                    || state.isOf(GrateModule.grateBlock)
                     || (state.isIn(QuarkTags.BlockTags.HOLLOW_LOGS) && state.get(PillarBlock.AXIS) == Direction.Axis.Y);
         }
 
