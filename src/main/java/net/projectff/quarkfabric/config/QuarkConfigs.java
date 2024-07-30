@@ -53,18 +53,70 @@ public class QuarkConfigs {
     private static void createConfigs() {
         configProvider.comment("Modules");
         configProvider.add("module_automation", true);
+        configProvider.add("module_building", true);
+        configProvider.add("module_client", true);
+        configProvider.add("module_decoration", true);
+        configProvider.add("module_experimental", true);
+        configProvider.add("module_management", true);
+        configProvider.add("module_misc", true);
+        configProvider.add("module_oddities", true);
+        configProvider.add("module_tweaks", true);
+        configProvider.add("module_vanity", true);
+        configProvider.add("module_world", true);
         configProvider.newLine(1);
 
         configProvider.comment("Automation");
+        configProvider.add("automation_AnimalsEatFloorFood", true);
+        configProvider.add("automation_ChainLinkage", true);
         configProvider.add("automation_Chute", true);
+        configProvider.add("automation_ColorSlime", true);
+        configProvider.add("automation_DispenserRecords", true);
+        configProvider.add("automation_DispensersPlaceBlocks", true);
+        configProvider.add("automation_DispensersPlaceSeeds", true);
         configProvider.add("automation_EnderWatcher", true);
         configProvider.add("automation_Gravisand", true);
+        configProvider.add("automation_MetalButtons", true);
+        configProvider.add("automation_ObsidianPressurePlate", true);
+        configProvider.add("automation_PistonBlockBreakers", true);
+        configProvider.add("automation_PistonsPushAndPullItems", true);
+        configProvider.add("automation_PistonsMoveTEs", true);
+        configProvider.add("automation_RainDetector", true);
+        configProvider.add("automation_RedstoneInductor", true);
+        configProvider.add("automation_RedstoneRandomizer", true);
+        configProvider.add("automation_SugarBlock", true);
     }
     private static void assignConfigs() {
         module_automation = configs.getOrDefault("module_automation", true);
+        module_building = configs.getOrDefault("module_building", true);
+        module_client = configs.getOrDefault("module_client", true);
+        module_decoration = configs.getOrDefault("module_decoration", true);
+        module_experimental = configs.getOrDefault("module_experimental", true);
+        module_management = configs.getOrDefault("module_management", true);
+        module_misc = configs.getOrDefault("module_misc", true);
+        module_oddities = configs.getOrDefault("module_oddities", true);
+        module_tweaks = configs.getOrDefault("module_tweaks", true);
+        module_vanity = configs.getOrDefault("module_vanity", true);
+        module_world = configs.getOrDefault("module_world", true);
+
+
+        automation_AnimalsEatFloorFood = configs.getOrDefault("automation_AnimalsEatFloorFood", true);
+        automation_ChainLinkage = configs.getOrDefault("automation_ChainLinkage", true);
         automation_Chute = configs.getOrDefault("automation_Chute", true);
+        automation_ColorSlime = configs.getOrDefault("automation_ColorSlime", true);
+        automation_DispenserRecords = configs.getOrDefault("automation_DispenserRecords", true);
+        automation_DispensersPlaceBlocks = configs.getOrDefault("automation_DispensersPlaceBlocks", true);
+        automation_DispensersPlaceSeeds = configs.getOrDefault("automation_DispensersPlaceSeeds", true);
         automation_EnderWatcher = configs.getOrDefault("automation_EnderWatcher", true);
         automation_Gravisand = configs.getOrDefault("automation_Gravisand", true);
+        automation_MetalButtons = configs.getOrDefault("automation_MetalButtons", true);
+        automation_ObsidianPressurePlate = configs.getOrDefault("automation_ObsidianPressurePlate", true);
+        automation_PistonBlockBreakers = configs.getOrDefault("automation_PistonBlockBreakers", true);
+        automation_PistonsPushAndPullItems = configs.getOrDefault("automation_PistonsPushAndPullItems", true);
+        automation_PistonsMoveTEs = configs.getOrDefault("automation_PistonsMoveTEs", true);
+        automation_RainDetector = configs.getOrDefault("automation_RainDetector", true);
+        automation_RedstoneInductor = configs.getOrDefault("automation_RedstoneInductor", true);
+        automation_RedstoneRandomizer = configs.getOrDefault("automation_RedstoneRandomizer", true);
+        automation_SugarBlock = configs.getOrDefault("automation_SugarBlock", true);
     }
 
     public static class Provider implements SimpleConfigAPI.DefaultConfig {
@@ -93,7 +145,7 @@ public class QuarkConfigs {
         // config functions
         public void add(String key, Object value) {
             this.configList.add(new Pair<>(key, value));
-            comment("type: " + value.getClass().getName() + "default value: " + value);
+            comment("type: " + value.getClass().getName() + " | default_value: " + value);
             this.configContents += key + " = " + value + '\n';
         }
         public void add(String key, Object value, String comment) {
