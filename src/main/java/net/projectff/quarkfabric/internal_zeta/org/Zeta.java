@@ -1,8 +1,5 @@
-package net.projectff.quarkfabric.internal_zeta;
+package net.projectff.quarkfabric.internal_zeta.org;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import org.slf4j.Logger;
 
 public abstract class Zeta {
