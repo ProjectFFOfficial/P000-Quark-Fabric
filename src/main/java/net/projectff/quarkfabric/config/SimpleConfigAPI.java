@@ -33,6 +33,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class SimpleConfigAPI {
@@ -124,8 +125,9 @@ public class SimpleConfigAPI {
     }
 
     private void parseConfigEntry( String entry, int line ) {
-        if( !entry.isEmpty() && !entry.startsWith( "#" ) ) {
-            String[] parts = entry.replace(" ", "").split("=", 2);
+        String entry_filtered = entry.replace(" ", "");
+        if( !entry_filtered.isEmpty() && !entry_filtered.startsWith( "#" ) ) {
+            String[] parts = entry_filtered.split("=", 2);
             if ( parts.length == 2 ) {
                 config.put( parts[0], parts[1] );
             } else {
@@ -174,59 +176,44 @@ public class SimpleConfigAPI {
         return config.get( key );
     }
 
-    /**
-     * Returns string value from config corresponding to the given
-     * key, or the default string if the key is missing.
-     *
-     * @return  value corresponding to the given key, or the default value
-     */
-    public String getOrDefault( String key, String def ) {
-        String val = get(key);
-        return val == null ? def : val;
-    }
-
-    /**
-     * Returns integer value from config corresponding to the given
-     * key, or the default integer if the key is missing or invalid.
-     *
-     * @return  value corresponding to the given key, or the default value
-     */
-    public int getOrDefault( String key, int def ) {
+    @SuppressWarnings("unchecked")
+    public <T> T getOrDefault(String key, T def, T min, boolean min_inclusive, T max, boolean max_inclusive) {
+        String value = get(key);
+        if (Objects.isNull(value)) return def;
         try {
-            return Integer.parseInt( get(key) );
+            if (def instanceof Double) {
+                Double parsedValue = Double.parseDouble(value);
+                if (checkRange(parsedValue, (Double) min, min_inclusive, (Double) max, max_inclusive)) {
+                    return (T) parsedValue;
+                }
+                return def;
+            } else if (def instanceof Integer) {
+                Integer parsedValue = Integer.parseInt(value);
+                if (checkRange(parsedValue, (Integer) min, min_inclusive, (Integer) max, max_inclusive)) {
+                    return (T) parsedValue;
+                }
+                return def;
+            } else if (def instanceof Boolean) {
+                return (T) Boolean.valueOf(value.equalsIgnoreCase("true"));
+            } else if (def instanceof String) {
+                return (T) value;
+            } else {
+                return def; // Default case if type is not handled
+            }
         } catch (Exception e) {
             return def;
         }
     }
-
-    /**
-     * Returns boolean value from config corresponding to the given
-     * key, or the default boolean if the key is missing.
-     *
-     * @return  value corresponding to the given key, or the default value
-     */
-    public boolean getOrDefault( String key, boolean def ) {
-        String val = get(key);
-        if( val != null ) {
-            return val.equalsIgnoreCase("true");
-        }
-
-        return def;
+    private <N extends Number & Comparable<N>> boolean checkRange(N value, N min, boolean minInclusive, N max, boolean maxInclusive) {
+        boolean isGreaterThanOrEqualMin = min == null || (minInclusive ? value.compareTo(min) >= 0 : value.compareTo(min) > 0);
+        boolean isLessThanOrEqualMax = max == null || (maxInclusive ? value.compareTo(max) <= 0 : value.compareTo(max) < 0);
+        return isGreaterThanOrEqualMin && isLessThanOrEqualMax;
+    }
+    public <T> T getOrDefault(String key, T def) {
+        return getOrDefault(key, def, null, false, null, false);
     }
 
-    /**
-     * Returns double value from config corresponding to the given
-     * key, or the default string if the key is missing or invalid.
-     *
-     * @return  value corresponding to the given key, or the default value
-     */
-    public double getOrDefault( String key, double def ) {
-        try {
-            return Double.parseDouble( get(key) );
-        } catch (Exception e) {
-            return def;
-        }
-    }
+
 
     /**
      * If any error occurred during loading or reading from the config
