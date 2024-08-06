@@ -67,10 +67,10 @@ public class FeedingTroughModule extends ZetaModule {
 
     //TODO: not sure this works properly. it only cancels the first orb
     public void onBreed(/*ZBabyEntitySpawn.Lowest event*/) {
-        /** ProjectF>F: not implemented*/
+        /**Note from ProjectF>F: not implemented*/
     }
     public void onOrbSpawn(/*ZEntityJoinLevel event*/) {
-        /** ProjectF>F: not implemented*/
+        /**Note from ProjectF>F: not implemented*/
     }
     /**Note from original
      *

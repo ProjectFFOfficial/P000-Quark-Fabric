@@ -5,10 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import net.projectff.quarkfabric.config.QuarkConfigManager;
 import net.projectff.quarkfabric.config.QuarkConfigs;
-import net.projectff.quarkfabric.content.automation.module.ChuteModule;
-import net.projectff.quarkfabric.content.automation.module.EnderWatcherModule;
-import net.projectff.quarkfabric.content.automation.module.FeedingTroughModule;
-import net.projectff.quarkfabric.content.automation.module.GravisandModule;
+import net.projectff.quarkfabric.content.automation.module.*;
 import net.projectff.quarkfabric.internal_zeta.org.FabricZeta;
 import net.projectff.quarkfabric.internal_zeta.org.Zeta;
 import org.slf4j.Logger;
@@ -35,6 +32,7 @@ public class Quark implements ModInitializer {
 			if (QuarkConfigs.Automation.enderWatcher) EnderWatcherModule.register();
 			if (QuarkConfigs.Automation.gravisand) GravisandModule.register();
 			if (QuarkConfigs.Automation.feedingTrough) FeedingTroughModule.register();
+			if (QuarkConfigs.Automation.chainsConnectBlocks) ChainsConnectBlocksModule.register();
 		}
 	}
 }
