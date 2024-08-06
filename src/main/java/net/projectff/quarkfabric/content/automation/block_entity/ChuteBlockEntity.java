@@ -16,7 +16,7 @@ import net.projectff.quarkfabric.content.automation.module.ChuteModule;
 import net.projectff.quarkfabric.content.building.module.GrateModule;
 import net.projectff.quarkfabric.registries.QuarkTags;
 import net.projectff.quarkfabric.content.automation.block.ChuteBlock;
-import net.projectff.quarkfabric.internal_zeta.ZetaBlockEntity;
+import net.projectff.quarkfabric.internal_zeta.org.ZetaBlockEntity;
 
 
 public class ChuteBlockEntity extends ZetaBlockEntity implements Inventory {

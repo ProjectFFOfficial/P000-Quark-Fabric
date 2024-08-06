@@ -27,12 +27,12 @@ public class QuarkConfigManager {
         configProvider.addAll("automation.", QuarkConfigs.Automation.AUTOMATION_STUFF, true, 1);
         configProvider.newLine(1);
 
-        configProvider.comment("Automation.FeedingThrough");
-        configProvider.add("automation.feedingThrough.loveChance", 0.333333333, 0.0, false, 1.0, true, "The chance (between 0 and 1) for an animal to enter love mode when eating from the trough", 1);
-        configProvider.add("automation.feedingThrough.cooldown", 30, 1, true, Integer.MAX_VALUE, false, "How long, in game ticks, between animals being able to eat from the trough", 1);
-        configProvider.add("automation.feedingThrough.maxAnimals", 32, "The maximum amount of animals allowed around the trough's range for an animal to enter love mode", 1);
-        configProvider.add("automation.feedingThrough.range", 10, 1);
-        configProvider.add("automation.feedingThrough.lookChance", 0.015, "Chance that an animal decides to look for a through. Closer it is to 1 the more performance it will take. Decreasing will make animals take longer to find one", 1);
+        configProvider.comment("Automation.FeedingTrough");
+        configProvider.add("automation.feedingTrough.loveChance", 0.333333333, 0.0, false, 1.0, true, "The chance (between 0 and 1) for an animal to enter love mode when eating from the trough", 1);
+        configProvider.add("automation.feedingTrough.cooldown", 30, 1, true, Integer.MAX_VALUE, false, "How long, in game ticks, between animals being able to eat from the trough", 1);
+        configProvider.add("automation.feedingTrough.maxAnimals", 32, "The maximum amount of animals allowed around the trough's range for an animal to enter love mode", 1);
+        configProvider.add("automation.feedingTrough.range", 10, 1);
+        configProvider.add("automation.feedingTrough.lookChance", 0.015, "Chance that an animal decides to look for a through. Closer it is to 1 the more performance it will take. Decreasing will make animals take longer to find one", 1);
 
     }
     private static void assignConfigs() {
@@ -56,17 +56,14 @@ public class QuarkConfigManager {
         QuarkConfigs.Automation.metalButtons = configs.getOrDefault("automation.metalButtons", true);
         QuarkConfigs.Automation.gravisand = configs.getOrDefault("automation.gravisand", true);
         QuarkConfigs.Automation.pistonsMoveTileEntities = configs.getOrDefault("automation.pistonsMoveTileEntities", true);
-        QuarkConfigs.Automation.feedingThrough = configs.getOrDefault("automation.feedingThrough", true);
+        QuarkConfigs.Automation.feedingTrough = configs.getOrDefault("automation.feedingTrough", true);
         QuarkConfigs.Automation.redstoneRandomizer = configs.getOrDefault("automation.redstoneRandomizer", true);
 
-        QuarkConfigs.Automation.FeedingThrough.loveChance = configs.getOrDefault("automation.feedingThrough.loveChance", 0.333333333, 0.0, false, 1.0, true);
-        QuarkConfigs.Automation.FeedingThrough.cooldown = configs.getOrDefault("automation.feedingThrough.cooldown", 30, 1, true, Integer.MAX_VALUE, false);
-        QuarkConfigs.Automation.FeedingThrough.maxAnimals = configs.getOrDefault("automation.feedingThrough.maxAnimals", 32);
-        QuarkConfigs.Automation.FeedingThrough.range = configs.getOrDefault("automation.feedingThrough.range", 10);
-        QuarkConfigs.Automation.FeedingThrough.lookChance = configs.getOrDefault("automation.feedingThrough.lookChance", 0.015);
-
-        Quark.LOGGER.info("[INFO] {}", QuarkConfigs.Automation.FeedingThrough.loveChance);
-        Quark.LOGGER.info("[INFO] {}", QuarkConfigs.Automation.FeedingThrough.cooldown);
+        QuarkConfigs.Automation.FeedingTrough.loveChance = configs.getOrDefault("automation.feedingTrough.loveChance", 0.333333333, 0.0, false, 1.0, true);
+        QuarkConfigs.Automation.FeedingTrough.cooldown = configs.getOrDefault("automation.feedingTrough.cooldown", 30, 1, true, Integer.MAX_VALUE, false);
+        QuarkConfigs.Automation.FeedingTrough.maxAnimals = configs.getOrDefault("automation.feedingTrough.maxAnimals", 32);
+        QuarkConfigs.Automation.FeedingTrough.range = configs.getOrDefault("automation.feedingTrough.range", 10);
+        QuarkConfigs.Automation.FeedingTrough.lookChance = configs.getOrDefault("automation.feedingTrough.lookChance", 0.015);
     }
     public static class Provider implements SimpleConfigAPI.DefaultConfig {
         private String configContents = "";

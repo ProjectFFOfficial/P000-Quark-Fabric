@@ -1,13 +1,4 @@
-package net.projectff.quarkfabric.internal_zeta;
-
-import net.minecraft.block.BlockState;
-import net.minecraft.registry.Registries;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
+package net.projectff.quarkfabric.internal_zeta.org;
 
 
 public interface IZetaBlock {

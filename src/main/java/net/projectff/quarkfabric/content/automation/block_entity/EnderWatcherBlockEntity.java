@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import net.projectff.quarkfabric.base.Quark;
 import net.projectff.quarkfabric.content.automation.module.EnderWatcherModule;
 import net.projectff.quarkfabric.content.automation.block.EnderWatcherBlock;
-import net.projectff.quarkfabric.internal_zeta.ZetaBlockEntity;
+import net.projectff.quarkfabric.internal_zeta.org.ZetaBlockEntity;
 import org.joml.Vector3f;
 
 import java.util.List;

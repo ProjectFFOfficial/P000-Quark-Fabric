@@ -1,9 +1,7 @@
-package net.projectff.quarkfabric.internal_zeta;
+package net.projectff.quarkfabric.internal_zeta.org;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerAbilities;
 
 public class FabricRaytracingUtil extends RaytracingUtil {
     public FabricRaytracingUtil() {

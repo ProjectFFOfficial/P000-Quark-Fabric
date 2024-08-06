@@ -1,4 +1,4 @@
-package net.projectff.quarkfabric.internal_zeta;
+package net.projectff.quarkfabric.internal_zeta.org;
 
 import org.slf4j.Logger;
 

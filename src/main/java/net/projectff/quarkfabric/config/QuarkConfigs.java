@@ -36,7 +36,7 @@ public class QuarkConfigs {
         public static boolean metalButtons = false;
         public static boolean gravisand = false;
         public static boolean pistonsMoveTileEntities = false;
-        public static boolean feedingThrough = false;
+        public static boolean feedingTrough = false;
         public static boolean redstoneRandomizer = false;
         protected static final String[] AUTOMATION_STUFF = {
                 "chute",
@@ -48,16 +48,16 @@ public class QuarkConfigs {
                 "metalButtons",
                 "gravisand",
                 "pistonsMoveTileEntities",
-                "feedingThrough",
+                "feedingTrough",
                 "redstoneRandomizer"
         };
-        public class FeedingThrough {
+        public class FeedingTrough {
             public static double loveChance = 0.333333333;
             public static int cooldown = 30;
             public static int maxAnimals = 32;
             public static double range = 10;
             public static double lookChance = 0.015;
-            protected static final String[] FEEDING_THROUGH_STUFF = {
+            protected static final String[] FEEDING_TROUGH_STUFF = {
                     "loveChance",
                     "cooldown",
                     "maxAnimals",

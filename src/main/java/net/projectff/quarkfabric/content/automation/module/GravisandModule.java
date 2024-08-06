@@ -9,7 +9,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.projectff.quarkfabric.content.automation.block.GravisandBlock;
 import net.projectff.quarkfabric.content.automation.entity.Gravisand;
-import net.projectff.quarkfabric.internal_zeta.ZetaModule;
+import net.projectff.quarkfabric.internal_zeta.org.ZetaModule;
 import net.projectff.quarkfabric.registries.QuarkRegistries;
 
 public class GravisandModule extends ZetaModule {

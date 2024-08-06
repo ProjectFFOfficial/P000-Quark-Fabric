@@ -10,7 +10,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.sound.BlockSoundGroup;
 import net.projectff.quarkfabric.content.automation.block.ChuteBlock;
 import net.projectff.quarkfabric.content.automation.block_entity.ChuteBlockEntity;
-import net.projectff.quarkfabric.internal_zeta.ZetaModule;
+import net.projectff.quarkfabric.internal_zeta.org.ZetaModule;
 import net.projectff.quarkfabric.registries.QuarkRegistries;
 
 public class ChuteModule extends ZetaModule {
@@ -24,7 +24,7 @@ public class ChuteModule extends ZetaModule {
                         .sounds(BlockSoundGroup.WOOD)
                         .burnable()));
         chuteBlockEntityType = QuarkRegistries.registerBlockEntityType("chute",
-                FabricBlockEntityTypeBuilder.create(ChuteBlockEntity::new, chuteBlock).build());
+                BlockEntityType.Builder.create(ChuteBlockEntity::new, chuteBlock).build());
     }
     public static final void registerClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(chuteBlock, RenderLayer.getCutoutMipped());

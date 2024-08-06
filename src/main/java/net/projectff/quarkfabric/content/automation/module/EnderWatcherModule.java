@@ -8,7 +8,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.projectff.quarkfabric.content.automation.block.EnderWatcherBlock;
 import net.projectff.quarkfabric.content.automation.block_entity.EnderWatcherBlockEntity;
-import net.projectff.quarkfabric.internal_zeta.ZetaModule;
+import net.projectff.quarkfabric.internal_zeta.org.ZetaModule;
 import net.projectff.quarkfabric.registries.QuarkRegistries;
 
 public class EnderWatcherModule extends ZetaModule {
@@ -21,6 +21,8 @@ public class EnderWatcherModule extends ZetaModule {
                         .strength(3f, 10f)
                         .sounds(BlockSoundGroup.METAL)));
         enderWatcherBlockEntityType = QuarkRegistries.registerBlockEntityType("ender_watcher",
-                FabricBlockEntityTypeBuilder.create(EnderWatcherBlockEntity::new, enderWatcherBlock).build());
+                BlockEntityType.Builder.create(EnderWatcherBlockEntity::new, enderWatcherBlock).build());
+    }
+    public static final void registerClient() {
     }
 }

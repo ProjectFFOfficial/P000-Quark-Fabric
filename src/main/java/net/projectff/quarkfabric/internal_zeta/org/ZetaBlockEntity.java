@@ -1,4 +1,4 @@
-package net.projectff.quarkfabric.internal_zeta;
+package net.projectff.quarkfabric.internal_zeta.org;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

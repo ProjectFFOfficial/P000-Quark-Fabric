@@ -1,4 +1,4 @@
-package net.projectff.quarkfabric.internal_zeta;
+package net.projectff.quarkfabric.internal_zeta.org;
 
 import java.util.Objects;
 import java.util.function.BooleanSupplier;
