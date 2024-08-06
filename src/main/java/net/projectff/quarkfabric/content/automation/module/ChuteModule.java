@@ -25,6 +25,7 @@ public class ChuteModule extends ZetaModule {
                         .burnable()));
         chuteBlockEntityType = QuarkRegistries.registerBlockEntityType("chute",
                 BlockEntityType.Builder.create(ChuteBlockEntity::new, chuteBlock).build());
+        QuarkRegistries.addFlammableZetablock(chuteBlock);
     }
     public static final void registerClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(chuteBlock, RenderLayer.getCutoutMipped());

@@ -155,6 +155,8 @@ public class FeedingTroughModule extends ZetaModule {
                 BlockEntityType.Builder.create(FeedingTroughBlockEntity::new, feedingTroughBlock).build(null));
 
         feedingTroughPoiType = QuarkRegistries.registerPointOfInterest("feeding_trough", 1, 32, feedingTroughBlock);
+
+        QuarkRegistries.addFlammableZetablock(feedingTroughBlock);
     }
     public static final void registerClient() {
     }

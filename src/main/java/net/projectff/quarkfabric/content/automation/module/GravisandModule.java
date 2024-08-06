@@ -25,7 +25,6 @@ public class GravisandModule extends ZetaModule {
                         .maxTrackingRange(10)
                         .trackingTickInterval(20) // update interval
                         .build());
-        QuarkRegistries.addFlammableZetablock(gravisandBlock);
     }
     public static final void registerClient() {
         EntityRendererRegistry.register(gravisandEntityType, FallingBlockEntityRenderer::new);

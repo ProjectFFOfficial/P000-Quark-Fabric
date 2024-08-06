@@ -36,15 +36,14 @@ public class ChuteBlock extends ZetaBock implements BlockEntityProvider {
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return createTickerHelper(type, ChuteModule.chuteBlockEntityType, ChuteBlockEntity::serverTick);
     }
-
     @Override
     public int getFlammabilityZeta() {
-        return 20;
+        return super.getFlammabilityZeta();
     }
 
     @Override
     public int getFireSpreadSpeedZeta() {
-        return 5;
+        return super.getFireSpreadSpeedZeta();
     }
 
     @Override

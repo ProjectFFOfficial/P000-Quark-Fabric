@@ -130,4 +130,14 @@ public class FeedingTroughBlock extends ZetaBock implements BlockEntityProvider 
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new FeedingTroughBlockEntity(pos, state);
     }
+
+    @Override
+    public int getFlammabilityZeta() {
+        return super.getFlammabilityZeta();
+    }
+
+    @Override
+    public int getFireSpreadSpeedZeta() {
+        return super.getFireSpreadSpeedZeta();
+    }
 }
