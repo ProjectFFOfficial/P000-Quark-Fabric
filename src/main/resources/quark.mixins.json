@@ -3,7 +3,11 @@
   "package": "net.projectff.quarkfabric.mixin.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "FallingBlockEntityAccessor"
+    "FallingBlockEntityAccessor",
+    "TemptationsSensorAccessor",
+    "TemptationsSensorMixin",
+    "TemptGoalAccessor",
+    "TemptGoalMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ItemStackParticleEffect;
@@ -40,7 +39,7 @@ public class FeedingTroughBlockEntity extends LootableContainerBlockEntity {
         super(FeedingTroughModule.feedingTroughBlockEntityType, pos, state);
         this.stacks = DefaultedList.ofSize(9, ItemStack.EMPTY);
     }
-    public void updateFloorHolder(AnimalEntity animalEntity, Ingredient ingredient, FakePlayer fakePlayer) {
+    public void updateFoodHolder(AnimalEntity animalEntity, Ingredient ingredient, FakePlayer fakePlayer) {
         for ( int i = 0; i < size(); i++) {
             ItemStack stack = this.getStack(i);
             if(ingredient.test(stack) && animalEntity.isBreedingItem(stack)) {
@@ -189,7 +188,11 @@ public class FeedingTroughBlockEntity extends LootableContainerBlockEntity {
         return new Generic3x3ContainerScreenHandler(syncId, playerInventory, this) {
             @Override
             public ScreenHandlerType<?> getType() {
-                return FeedingTroughModule.screenHandlerType;
+                /**
+                 *  Note form ProjectF>F
+                 *  Original mod uses its own screen handler for the Feeding Trough, not sure why, probably ScreenHandlerType.GENERIC_3X3 wasn't a thing back then
+                 */
+                return ScreenHandlerType.GENERIC_3X3;
             }
         };
     }
