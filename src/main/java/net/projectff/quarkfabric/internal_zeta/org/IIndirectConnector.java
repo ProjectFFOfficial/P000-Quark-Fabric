@@ -10,7 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public interface IIndirectConnector {
+public interface IIndirectConnector { /**Note from ProjectF>F: Serves no purpose currently (and probably never will)*/
+
     List<Pair<Predicate<BlockState>, IIndirectConnector>> INDIRECT_STICKY_BLOCKS = new LinkedList<>();
 
     default boolean isEnabled() {

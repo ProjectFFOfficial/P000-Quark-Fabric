@@ -14,34 +14,48 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PistonHandler.class)
-public abstract class PistonHandlerMixin {
-
+public abstract class PistonHandlerMixin { //TODO: TEMP
     @Shadow
     protected abstract boolean tryMove(BlockPos pos, Direction dir);
     @Final
     @Shadow
     private World world;
+    @Final
+    @Shadow
+    private Direction motionDirection;
     @Shadow
     private static boolean isBlockSticky(BlockState state) {
         throw new AssertionError();
     }
+    @Shadow
+    private static boolean isAdjacentBlockStuck(BlockState state, BlockState adjacentState) {
+        throw new AssertionError();
+    }
+
+    @Shadow protected abstract boolean tryMoveAdjacentBlock(BlockPos pos);
+
+    @Shadow @Final private Direction pistonDirection;
 
     /**Note from ProjectF>F: Own implementation for chain linkage*/
-    @Redirect(method = "calculatePush", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/piston/PistonHandler;isBlockSticky(Lnet/minecraft/block/BlockState;)Z"))
-    private boolean alwaysTrue0(BlockState state) {
+    @WrapOperation(method = "calculatePush", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/piston/PistonHandler;isBlockSticky(Lnet/minecraft/block/BlockState;)Z"))
+    private boolean alwaysTrue0(BlockState state, Operation<Boolean> original) {
         if (ChainsConnectBlocksModule.isEnabled) return true;
-        else return isBlockSticky(state);
+        else return original.call(state);
+    }
+    @WrapOperation(method = "tryMove", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/piston/PistonHandler;isBlockSticky(Lnet/minecraft/block/BlockState;)Z", ordinal = 1))
+    private boolean alwaysTrue1(BlockState state, Operation<Boolean> original) {
+        if (ChainsConnectBlocksModule.isEnabled) return true;
+        else return original.call(state);
+    }
+    @WrapOperation(method = "tryMove", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/piston/PistonHandler;isBlockSticky(Lnet/minecraft/block/BlockState;)Z", ordinal = 0))
+    private boolean takeChainBlocksIntoAccount(BlockState state, Operation<Boolean> original) {
+        if (ChainsConnectBlocksModule.isEnabled) return true;
+        else return original.call(state);
     }
 
-    @Redirect(method = "tryMove", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/piston/PistonHandler;isBlockSticky(Lnet/minecraft/block/BlockState;)Z"))
-    private boolean alwaysTrue1(BlockState state) {
-        if (ChainsConnectBlocksModule.isEnabled) return true;
-        else return isBlockSticky(state);
-    }
     @Inject(method = "tryMoveAdjacentBlock", at = @At(value = "HEAD"), cancellable = true)
     private void tryMoveChainLinkedStuff(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (ChainsConnectBlocksModule.isEnabled) {
@@ -65,7 +79,6 @@ public abstract class PistonHandlerMixin {
                     if (!tryMove(pos0, direction1)) cir.setReturnValue(false);
                 }
             }
-            if (!isBlockSticky(world.getBlockState(pos))) cir.setReturnValue(true);
         }
     }
 

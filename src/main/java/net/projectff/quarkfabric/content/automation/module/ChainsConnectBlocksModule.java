@@ -2,9 +2,17 @@ package net.projectff.quarkfabric.content.automation.module;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ChainBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
+import net.projectff.quarkfabric.internal_zeta.org.IIndirectConnector;
 import net.projectff.quarkfabric.internal_zeta.org.ZetaModule;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.function.Predicate;
 
 public class ChainsConnectBlocksModule extends ZetaModule {
 
@@ -16,14 +24,16 @@ public class ChainsConnectBlocksModule extends ZetaModule {
         isEnabled = true;
     }
 
-    /*public static class ChainConnection implements IIndirectConnector {
+
+    /*
+    public static class ChainConnection implements IIndirectConnector {
 
         public static ChainConnection INSTANCE = new ChainConnection();
         public static Predicate<BlockState> PREDICATE = state -> state.getBlock() == Blocks.CHAIN;
 
         @Override
         public boolean isEnabled() {
-            return ChainsConnectBlocksModule.staticEnabled;
+            return ChainsConnectBlocksModule.isEnabled;
         }
 
         @Override

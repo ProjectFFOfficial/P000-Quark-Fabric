@@ -77,22 +77,22 @@ public class QuarkConfigManager {
         }
 
         // formatting functions
-        public void rawIncersion(String string) {
+        public void rawInsertion(String string) {
             this.configContents += string;
         }
         public void newLine(int new_lines) {
             for (int i = 0; i < new_lines; i++) {
-                this.rawIncersion("\n");
+                this.rawInsertion("\n");
             }
         }
         public void indentation(int indentation) {
             for (int i = 0; i < indentation; i++) {
-                this.rawIncersion("    ");
+                this.rawInsertion("    ");
             }
         }
         public void comment(String comment, int... indentation) {
             if (indentation.length > 0) this.indentation(indentation[0]);
-            this.rawIncersion("# " + comment + '\n');
+            this.rawInsertion("# " + comment + '\n');
         }
         // config functions
         public <T> void add(String key, T value, T min, boolean min_inclusive, T max, boolean max_inclusive, int... indentation) {
@@ -102,14 +102,14 @@ public class QuarkConfigManager {
             if (indentation.length > 0) this.indentation(indentation[0]);
             this.comment("type: " + value.getClass().getCanonicalName() + " | default_value: " + value + " | allowed_values: " + min_incl + min + "," + max + max_incl);
             if (indentation.length > 0) this.indentation(indentation[0]);
-            this.rawIncersion(key + " = " + value + '\n');
+            this.rawInsertion(key + " = " + value + '\n');
         }
         public <T> void add(String key, T value, int... indentation) {
             this.configList.add(new Pair<>(key, value));
             if (indentation.length > 0) this.indentation(indentation[0]);
             this.comment("type: " + value.getClass().getCanonicalName() + " | default_value: " + value);
             if (indentation.length > 0) this.indentation(indentation[0]);
-            this.rawIncersion(key + " = " + value + '\n');
+            this.rawInsertion(key + " = " + value + '\n');
         }
         public <T> void add(String key, T value, T min, boolean min_inclusive, T max, boolean max_inclusive, String comment, int... indentation) {
             this.comment(comment, indentation);
